@@ -13,44 +13,43 @@ app = Client(
     api_hash=API_HASH
 )
 
+def get_utf16_length(text):
+    """Calculate UTF-16 length for proper entity offsets"""
+    return len(text.encode('utf-16-le')) // 2
+
 @app.on_message(filters.command("start"))
 async def start_command(client, message):
     
-    # Caption text (exactly jaise Waifu bot ne bheja)
-    caption = "🌸 Hello I'm alive 🌸! ✨"
+    # Simple test - sirf ek emoji
+    text = "🌸"
     
-    # Custom emoji entities for caption
+    # UTF-16 mein length calculate karo
+    offset = 0
+    length = get_utf16_length(text)
+    
+    print(f"Text: {text}")
+    print(f"Offset: {offset}, Length: {length}")
+    
     entities = [
         types.MessageEntityCustomEmoji(
-            offset=0,
-            length=2,
-            document_id=5850355647450714328  # 🌸 pehla
-        ),
-        types.MessageEntityCustomEmoji(
-            offset=20,
-            length=2,
-            document_id=5850355647450714328  # 🌸 dusra
-        ),
-        types.MessageEntityCustomEmoji(
-            offset=24,
-            length=1,
-            document_id=5850203446694646751  # ✨
+            offset=offset,
+            length=length,
+            document_id=5850355647450714328
         )
     ]
     
-    # Agar tumhare paas video/GIF hai to uska path do
-    # Abhi simple text message bhejte hain with entities
-    
-    result = await client.invoke(
-        functions.messages.SendMessage(
-            peer=await client.resolve_peer(message.chat.id),
-            message=caption,
-            entities=entities,
-            random_id=client.rnd_id()
+    try:
+        result = await client.invoke(
+            functions.messages.SendMessage(
+                peer=await client.resolve_peer(message.chat.id),
+                message=text,
+                entities=entities,
+                random_id=client.rnd_id()
+            )
         )
-    )
-    
-    print(f"Sent with entities: {result}")
+        print(f"Success! Result: {result}")
+    except Exception as e:
+        print(f"Error: {e}")
 
 if __name__ == "__main__":
     print("Bot is starting...")
