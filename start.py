@@ -1,6 +1,5 @@
-# start.py
 from pyrogram import Client, filters
-from pyrogram.types import MessageEntity
+from pyrogram.raw import functions, types
 from pyrogram import enums
 # Apni details yahan dalo
 BOT_TOKEN = "7937721399:AAHAIOM5pkjrW_EjRinIUNoaJhjhEWzRmPg"  # @BotFather se milega
