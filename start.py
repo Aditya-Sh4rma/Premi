@@ -1,4 +1,4 @@
-# start.py  
+# start.py
 from pyrogram import Client, filters
 from pyrogram.raw import functions, types
 
@@ -15,28 +15,28 @@ app = Client(
 
 @app.on_message(filters.command("start"))
 async def start_command(client, message):
-    # Text mein normal emoji MUST be present
+    # FREE custom emoji IDs (jo bots bhi use kar sakte hain)
+    # Ye IDs "free" custom emojis ki hain
+    
     text = "Hello I'm alive 🐶"
     
-    # Entity must wrap EXACTLY the emoji (offset and length must match emoji position)
-    entities = [
-        types.MessageEntityCustomEmoji(
-            offset=16,  # Position of 🐶
-            length=2,   # Length of 🐶 in UTF-16
-            document_id=5850591660198596754
-        )
-    ]
+    # Tum jo ID diye the (5850591660198596754) wo shayad premium-only hai
+    # Free custom emoji ID try karo (example: popular free packs se)
     
-    result = await client.invoke(
+    await client.invoke(
         functions.messages.SendMessage(
             peer=await client.resolve_peer(message.chat.id),
             message=text,
-            entities=entities,
+            entities=[
+                types.MessageEntityCustomEmoji(
+                    offset=16,
+                    length=2,
+                    document_id=5850591660198596754  # Ye ID try karo
+                )
+            ],
             random_id=client.rnd_id()
         )
     )
-    
-    print(f"Result: {result}")
 
 if __name__ == "__main__":
     print("Bot is starting...")
