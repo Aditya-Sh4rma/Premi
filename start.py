@@ -1,5 +1,5 @@
 from pyrogram import Client, filters, enums
-from pyrofork.raw import functions, types
+from pyrogram.raw import functions, types
 
 BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"
 API_ID = 12345678
