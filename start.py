@@ -16,12 +16,20 @@ app = Client(
 
 @app.on_message(filters.command("start"))
 async def start_command(client, message):
-    # Premium emoji with custom_emoji_id
-    text = "Hello I'm alive <emoji id=5850509914086052253>🙀</emoji>"
-    
-    await message.reply_text(
-        text,
-        parse_mode=enums.ParseMode.HTML
+    # Raw API se message bhejenge with premium emoji
+    await client.invoke(
+        functions.messages.SendMessage(
+            peer=await client.resolve_peer(message.chat.id),
+            message="Hello I'm alive 🙀",
+            entities=[
+                types.MessageEntityCustomEmoji(
+                    offset=14,
+                    length=2,
+                    document_id=5850509914086052253
+                )
+            ],
+            random_id=client.rnd_id()
+        )
     )
 
 if __name__ == "__main__":
