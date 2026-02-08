@@ -1,7 +1,6 @@
 # start.py
 from pyrogram import Client, filters
 from pyrogram.raw import functions, types
-import struct
 
 BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"
 API_ID = 12345678
@@ -17,15 +16,14 @@ app = Client(
 @app.on_message(filters.command("start"))
 async def start_command(client, message):
     
-    # Method 1: Pehle simple message bhejte hain
+    # Direct raw method with InputMessageEntityCustomEmoji
     text = "Hello I'm alive 🐶"
     
     try:
-        result = await client.invoke(
+        await client.send(
             functions.messages.SendMessage(
                 peer=await client.resolve_peer(message.chat.id),
                 message=text,
-                no_webpage=True,
                 entities=[
                     types.MessageEntityCustomEmoji(
                         offset=16,
@@ -33,14 +31,13 @@ async def start_command(client, message):
                         document_id=5850591660198596754
                     )
                 ],
-                random_id=client.rnd_id()
+                no_webpage=True,
+                random_id=client.rnd_id(),
+                reply_to=types.InputReplyToMessage(reply_to_msg_id=message.id)
             )
         )
-        print(f"Message sent successfully: {result}")
     except Exception as e:
         print(f"Error: {e}")
-        # Fallback - normal message
-        await message.reply_text("Hello I'm alive 🐶")
 
 if __name__ == "__main__":
     print("Bot is starting...")
