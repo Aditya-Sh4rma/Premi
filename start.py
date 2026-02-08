@@ -15,18 +15,25 @@ app = Client(
 
 @app.on_message(filters.command("start"))
 async def start_command(client, message):
-    # Raw API se message bhejenge with premium emoji
+    # Text with emoji placeholder
+    text = "Hello I'm alive 🙀"
+    
+    # Premium emoji entity
+    # offset=16 kyunki "Hello I'm alive " = 16 characters (space included)
+    # length=2 kyunki emoji 2 UTF-16 units leta hai
+    entities = [
+        types.MessageEntityCustomEmoji(
+            offset=16,  # "Hello I'm alive " ke baad emoji start hota hai
+            length=2,   # Emoji ki length
+            document_id=5850509914086052253  # Tumhara premium emoji ID
+        )
+    ]
+    
     await client.invoke(
         functions.messages.SendMessage(
             peer=await client.resolve_peer(message.chat.id),
-            message="Hello I'm alive 🙀",
-            entities=[
-                types.MessageEntityCustomEmoji(
-                    offset=14,
-                    length=2,
-                    document_id=5850509914086052253
-                )
-            ],
+            message=text,
+            entities=entities,
             random_id=client.rnd_id()
         )
     )
