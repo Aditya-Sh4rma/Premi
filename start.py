@@ -2,24 +2,24 @@
 from pyrogram import Client, filters
 from pyrogram.types import MessageEntity
 
-# Apna bot token yahan dalo
-BOT_TOKEN = "7937721399:AAHAIOM5pkjrW_EjRinIUNoaJhjhEWzRmPg"
+# Apni details yahan dalo
+BOT_TOKEN = "7937721399:AAHAIOM5pkjrW_EjRinIUNoaJhjhEWzRmPg"  # @BotFather se milega
+API_ID = 21346925  # my.telegram.org se milega (number)
+API_HASH = "908c9a085a238d1cd484a4269c887234"  # my.telegram.org se milega (string)
 
-# Bot client
 app = Client(
     "my_bot",
     bot_token=BOT_TOKEN,
-    api_id=123456,  # apni API ID yahan dalo
-    api_hash="your_api_hash_here"  # apni API hash yahan dalo
+    api_id=API_ID,
+    api_hash=API_HASH
 )
 
 @app.on_message(filters.command("start"))
 async def start_command(client, message):
-    # Premium emoji entity
     entities = [
         MessageEntity(
             type="custom_emoji",
-            offset=14,  # "Hello I'm alive" ke baad (14 characters)
+            offset=14,
             length=2,
             custom_emoji_id="5850509914086052253"
         )
