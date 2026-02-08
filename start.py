@@ -1,7 +1,7 @@
 # start.py
 from pyrogram import Client, filters
 from pyrogram.types import MessageEntity
-
+from pyrogram import enums
 # Apni details yahan dalo
 BOT_TOKEN = "7937721399:AAHAIOM5pkjrW_EjRinIUNoaJhjhEWzRmPg"  # @BotFather se milega
 API_ID = 21346925  # my.telegram.org se milega (number)
