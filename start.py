@@ -1,5 +1,4 @@
-# start.py
-from pyrofork import Client, filters
+from pyrofork import Client, filters, enums
 from pyrofork.raw import functions, types
 
 BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"
