@@ -1,4 +1,5 @@
-from pyrogram import Client, filters, enums
+# start.py  
+from pyrogram import Client, filters
 from pyrogram.raw import functions, types
 
 BOT_TOKEN = "7937721399:AAHAIOM5pkjrW_EjRinIUNoaJhjhEWzRmPg"
@@ -14,22 +15,28 @@ app = Client(
 
 @app.on_message(filters.command("start"))
 async def start_command(client, message):
+    # Text mein normal emoji MUST be present
     text = "Hello I'm alive 🐶"
     
-    await client.invoke(
+    # Entity must wrap EXACTLY the emoji (offset and length must match emoji position)
+    entities = [
+        types.MessageEntityCustomEmoji(
+            offset=16,  # Position of 🐶
+            length=2,   # Length of 🐶 in UTF-16
+            document_id=5850591660198596754
+        )
+    ]
+    
+    result = await client.invoke(
         functions.messages.SendMessage(
             peer=await client.resolve_peer(message.chat.id),
             message=text,
-            entities=[
-                types.MessageEntityCustomEmoji(
-                    offset=16,
-                    length=2,
-                    document_id=5850591660198596754
-                )
-            ],
+            entities=entities,
             random_id=client.rnd_id()
         )
     )
+    
+    print(f"Result: {result}")
 
 if __name__ == "__main__":
     print("Bot is starting...")
