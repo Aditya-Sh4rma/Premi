@@ -15,28 +15,42 @@ app = Client(
 
 @app.on_message(filters.command("start"))
 async def start_command(client, message):
-    # FREE custom emoji IDs (jo bots bhi use kar sakte hain)
-    # Ye IDs "free" custom emojis ki hain
     
-    text = "Hello I'm alive 🐶"
+    # Caption text (exactly jaise Waifu bot ne bheja)
+    caption = "🌸 Hello I'm alive 🌸! ✨"
     
-    # Tum jo ID diye the (5850591660198596754) wo shayad premium-only hai
-    # Free custom emoji ID try karo (example: popular free packs se)
+    # Custom emoji entities for caption
+    entities = [
+        types.MessageEntityCustomEmoji(
+            offset=0,
+            length=2,
+            document_id=5850355647450714328  # 🌸 pehla
+        ),
+        types.MessageEntityCustomEmoji(
+            offset=20,
+            length=2,
+            document_id=5850355647450714328  # 🌸 dusra
+        ),
+        types.MessageEntityCustomEmoji(
+            offset=24,
+            length=1,
+            document_id=5850203446694646751  # ✨
+        )
+    ]
     
-    await client.invoke(
+    # Agar tumhare paas video/GIF hai to uska path do
+    # Abhi simple text message bhejte hain with entities
+    
+    result = await client.invoke(
         functions.messages.SendMessage(
             peer=await client.resolve_peer(message.chat.id),
-            message=text,
-            entities=[
-                types.MessageEntityCustomEmoji(
-                    offset=16,
-                    length=2,
-                    document_id=5850591660198596754  # Ye ID try karo
-                )
-            ],
+            message=caption,
+            entities=entities,
             random_id=client.rnd_id()
         )
     )
+    
+    print(f"Sent with entities: {result}")
 
 if __name__ == "__main__":
     print("Bot is starting...")
