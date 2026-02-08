@@ -1,4 +1,3 @@
-# start.py
 from pyrogram import Client, filters
 from pyrogram.enums import ParseMode
 
@@ -15,19 +14,8 @@ app = Client(
 
 @app.on_message(filters.command("start"))
 async def start_command(client, message):
-    
-    # HTML format with custom emoji
     text = 'Hello I\'m alive <emoji id="5850720861404795438">🐶</emoji>'
-    
-    try:
-        await message.reply_text(
-            text,
-            parse_mode=ParseMode.HTML
-        )
-        print("✅ Message sent successfully with custom emoji!")
-    except Exception as e:
-        print(f"❌ Error: {e}")
+    await message.reply_text(text, parse_mode=ParseMode.HTML)
 
 if __name__ == "__main__":
-    print("Bot is starting...")
     app.run()
