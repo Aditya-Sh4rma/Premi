@@ -3,7 +3,7 @@ from pyrogram import Client, filters
 from pyrogram.types import MessageEntity
 
 # Apna bot token yahan dalo
-BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"
+BOT_TOKEN = "7937721399:AAHAIOM5pkjrW_EjRinIUNoaJhjhEWzRmPg"
 
 # Bot client
 app = Client(
