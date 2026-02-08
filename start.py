@@ -1,9 +1,9 @@
 from pyrogram import Client, filters, enums
 from pyrogram.raw import functions, types
 
-BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"
-API_ID = 12345678
-API_HASH = "your_api_hash_here"
+BOT_TOKEN = "7937721399:AAHAIOM5pkjrW_EjRinIUNoaJhjhEWzRmPg"
+API_ID = 21346925
+API_HASH = "908c9a085a238d1cd484a4269c887234"
 
 app = Client(
     "my_bot",
