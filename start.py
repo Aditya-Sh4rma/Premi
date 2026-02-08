@@ -1,10 +1,11 @@
+# start.py
 from pyrogram import Client, filters
 from pyrogram.raw import functions, types
-from pyrogram import enums
+
 # Apni details yahan dalo
-BOT_TOKEN = "7937721399:AAHAIOM5pkjrW_EjRinIUNoaJhjhEWzRmPg"  # @BotFather se milega
-API_ID = 21346925  # my.telegram.org se milega (number)
-API_HASH = "908c9a085a238d1cd484a4269c887234"  # my.telegram.org se milega (string)
+BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"
+API_ID = 12345678
+API_HASH = "your_api_hash_here"
 
 app = Client(
     "my_bot",
@@ -16,16 +17,14 @@ app = Client(
 @app.on_message(filters.command("start"))
 async def start_command(client, message):
     # Text with emoji placeholder
-    text = "Hello I'm alive 🙀"
+    text = "Hello I'm alive 🐶"
     
     # Premium emoji entity
-    # offset=16 kyunki "Hello I'm alive " = 16 characters (space included)
-    # length=2 kyunki emoji 2 UTF-16 units leta hai
     entities = [
         types.MessageEntityCustomEmoji(
-            offset=16,  # "Hello I'm alive " ke baad emoji start hota hai
-            length=2,   # Emoji ki length
-            document_id=5850509914086052253  # Tumhara premium emoji ID
+            offset=16,  # "Hello I'm alive " ke baad
+            length=2,   # Emoji length
+            document_id=5850591660198596754  # Naya premium emoji ID
         )
     ]
     
